@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Atmosphere and Air Pollution</title>
+<style>
+:root{--navy:#04472A;--teal:#046A38;--teal2:#3E9B66;--gold:#F1C400;--slate:#2F3A33;--paper:#F5F8F2;--card:#fff;--line:#D5DEE5;
+  --ok:#046A38;--okbg:#E3F2E8;--bad:#A33A2B;--badbg:#FBE9E6;--warn:#5C4A00;--warnbg:#FFF8D6;
+  --serif:Georgia,'Times New Roman',serif;--sans:Calibri,'Segoe UI',Arial,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--slate);background:var(--paper)}
+header.top{background:var(--navy);color:#fff;padding:12px 22px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+header.top h1{font-family:var(--serif);font-weight:normal;font-size:21px;margin:0;flex:1 1 260px}
+header.top h1 small{display:block;font-family:var(--sans);font-size:14px;opacity:.8}
+#wig{flex:0 0 260px;max-width:100%}#wig svg{display:block;width:100%;height:40px}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);max-width:1180px;margin:0 auto}
+nav#rail{padding:18px 14px 40px 18px;border-right:1px solid var(--line);font-size:15px}
+nav#rail button{display:flex;gap:9px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;padding:8px 8px;border-radius:7px;font:inherit;color:var(--slate);cursor:pointer;margin-bottom:2px}
+nav#rail button.cur{background:#E6F0E4;color:var(--navy);font-weight:bold}
+nav#rail .pip{flex:0 0 14px;height:14px;margin-top:5px;border-radius:50%;border:2px solid #9AA8B5}
+nav#rail .done .pip{background:var(--teal);border-color:var(--teal)}
+nav#rail small{display:block;font-weight:normal;color:#5b6b7a}
+main{padding:22px 26px 80px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px 28px;margin-bottom:18px}
+.card h2{font-family:var(--serif);color:var(--navy);font-size:27px;margin:0 0 2px;font-weight:normal}
+.card h3{font-family:var(--serif);color:var(--navy);font-size:20px;font-weight:normal;margin:26px 0 4px}
+.sec{color:var(--teal);font-size:15px;margin:0 0 14px}
+.card p,.card ul,.card ol{max-width:68ch}
+figure{margin:16px 0;max-width:720px}figure img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+figure.narrow{max-width:400px}figure.mid{max-width:560px}figcaption{font-size:14.5px;color:#4a5b6b;margin-top:6px;max-width:68ch}
+.pair{display:flex;gap:18px;flex-wrap:wrap}.pair figure{flex:1 1 260px;margin:10px 0}
+.callout{margin:18px 0;padding:14px 18px;border-left:5px solid var(--gold);background:var(--warnbg);border-radius:6px;max-width:70ch;color:#4a3b00}
+.callout.key{border-left-color:var(--teal);background:var(--okbg);color:#04472A}
+details{margin:14px 0;max-width:70ch}details summary{cursor:pointer;color:var(--teal);font-weight:bold}
+.eq{font-family:var(--serif);font-size:19px;margin:12px 0;padding:8px 14px;background:#F6F9F3;border-left:4px solid var(--teal2);max-width:68ch;overflow-x:auto}
+.act{margin:22px 0;padding:18px 20px;border:1px solid var(--line);border-left:5px solid var(--teal2);border-radius:8px;background:#FBFDFA}
+.act.resolved{border-left-color:var(--teal);background:#F4FAF4}
+.act .atag{font-size:14px;color:var(--teal);margin-bottom:2px}
+.act .aq{font-weight:bold;color:var(--navy);margin:2px 0 10px;max-width:68ch}
+.choices label{display:flex;gap:9px;align-items:flex-start;margin:6px 0;cursor:pointer;max-width:68ch}
+.choices label input{margin-top:6px}
+.choices label.right span{color:var(--ok);font-weight:bold}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+button.b{font:inherit;font-weight:bold;border-radius:8px;padding:8px 18px;border:2px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+button.b.alt{background:#fff;color:var(--teal)}button.b.gold{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+button.b.ghost{background:none;border-color:var(--line);color:var(--slate);font-weight:normal}
+button.b:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #F1C400}
+input[type=text],textarea,select{font:inherit;color:var(--navy);padding:7px 10px;border:2px solid var(--line);border-radius:7px;background:#fff;max-width:100%}
+input[type=text]{width:150px}textarea{width:100%;max-width:68ch;min-height:100px;resize:vertical}
+.fb{margin-top:10px;max-width:70ch;padding:0}.fb.ok,.fb.no,.fb.hint{padding:10px 14px;border-radius:8px}
+.fb.ok{background:var(--okbg);border-left:5px solid var(--ok);color:#04472A}
+.fb.no{background:var(--badbg);border-left:5px solid var(--bad);color:#6B2418}
+.fb.hint{background:var(--warnbg);border-left:5px solid var(--gold);color:#4a3b00}
+.crow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid #E6ECF0;max-width:760px}
+.crow .ct{flex:1 1 280px}.crow.ok select{border-color:var(--ok);background:var(--okbg)}.crow.no select{border-color:var(--bad)}
+.crow .cfb{flex:1 1 100%;font-size:15px}.crow.ok .cfb{color:var(--ok)}.crow.no .cfb{color:var(--bad)}
+.orow{display:flex;gap:10px;align-items:center;padding:8px 12px;margin:6px 0;border:2px solid var(--line);border-radius:8px;background:#fff;max-width:720px}
+.orow.ok{border-color:var(--ok);background:var(--okbg)}.orow .otxt{flex:1}
+.orow button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:6px;width:34px;height:34px;cursor:pointer}
+.field{margin:12px 0}.field label{display:block;font-weight:bold;color:var(--navy);margin-bottom:4px}
+.field .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.field.ok input{border-color:var(--ok);background:var(--okbg)}.field.no input{border-color:var(--bad)}
+.field .ffb{font-size:15px;margin-top:4px;max-width:68ch}.field.ok .ffb{color:var(--ok)}.field.no .ffb{color:var(--bad)}
+.sph{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}.sph button{font:inherit;border:2px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;cursor:pointer;color:var(--navy)}
+.sph button.seen{border-color:var(--teal);background:var(--okbg)}.sph button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.panel{min-height:70px;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;max-width:68ch}
+svg.w{width:100%;max-width:640px;height:auto;background:#fff;border:1px solid var(--line);border-radius:8px}
+svg.w text{font-family:var(--sans);font-size:13px;fill:var(--slate)}
+input[type=range]{width:min(420px,100%);accent-color:var(--teal)}
+.read{font-family:var(--serif);color:var(--navy);margin:6px 0}.read b{color:var(--teal)}
+.nav2{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.prog{font-size:15px;color:#4a5b6b}
+table.t{border-collapse:collapse;margin:10px 0}table.t td,table.t th{border:1px solid var(--line);padding:6px 12px;text-align:left}table.t th{background:#E8F0E3;color:var(--navy)}
+.final .score{font-family:var(--serif);font-size:42px;color:var(--navy)}
+#railbtn{display:none;margin:10px 12px 0}
+@media (max-width:820px){.layout{grid-template-columns:1fr}nav#rail{border-right:0;border-bottom:1px solid var(--line);max-height:0;overflow:hidden;padding:0 14px}
+  nav#rail.open{max-height:none;padding:14px}#railbtn{display:inline-block}main{padding:16px 12px 70px}.card{padding:16px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>The Atmosphere and Air Pollution<small>Interactive lesson</small></h1>
+  <div id="wig" aria-label="Progress"></div>
+</header>
+<button class="b ghost" id="railbtn" type="button">Show / hide modules</button>
+<div class="layout"><nav id="rail" aria-label="Modules"></nav><main id="main"></main></div>
+<script>
+/* ================= Climate I lesson: library ================= */
+(function(){
+'use strict';
+var Q=new URLSearchParams(location.search);
+var PREVIEW=Q.get('preview')==='1';
+var CONFIG={BLOCK_PASTE:false,MASTERY:70};
+var LMS=(function(){
+  var api=null,ok=false,mode='local',NS=PREVIEW?'atmos1_prev_':'atmos1_v1_';
+  function find(w){var n=0;while(w&&!w.API&&w.parent&&w.parent!==w&&n<12){w=w.parent;n++;}return(w&&w.API)?w.API:null;}
+  try{api=find(window);if(!api&&window.opener)api=find(window.opener);}catch(e){api=null;}
+  if(api&&!PREVIEW){try{ok=String(api.LMSInitialize(''))==='true';}catch(e){ok=false;}}
+  mode=ok?'lms':'local';
+  function lg(k){try{return localStorage.getItem(NS+k)||'';}catch(e){return '';}}
+  function ls(k,v){try{localStorage.setItem(NS+k,v);}catch(e){}}
+  return{mode:mode,
+    get:function(k){if(mode==='lms'){try{return String(api.LMSGetValue(k));}catch(e){return '';}}return lg(k);},
+    set:function(k,v){if(mode==='lms'){try{api.LMSSetValue(k,String(v));}catch(e){}}else ls(k,v);},
+    commit:function(){if(mode==='lms'){try{api.LMSCommit('');}catch(e){}}},
+    finish:function(){if(mode==='lms'){try{api.LMSCommit('');api.LMSFinish('');}catch(e){}mode='done';}}};
+})();
+function xmur(str){var h=1779033703^str.length;for(var i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),3432918353);h=(h<<13)|(h>>>19);}
+  return function(){h=Math.imul(h^(h>>>16),2246822507);h=Math.imul(h^(h>>>13),3266489909);return(h^=h>>>16)>>>0;};}
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function shuffle(arr,key){var a=arr.slice(),r=mulberry(xmur(key)());for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function close(a,b,rel){rel=rel===undefined?0.02:rel;return Math.abs(a-b)<=Math.max(rel*Math.abs(b),1e-9);}
+function fm(x,d){if(d===undefined)d=1;return Number(x.toFixed(d)).toLocaleString('en-US',{maximumFractionDigits:d});}
+
+/* numbers and simple expressions: + - * / ^ ( ), e, ln(), exp(), sqrt(); no variables */
+function evalNum(src){
+  var s=String(src).toLowerCase().replace(/[\u2212\u2013]/g,'-').replace(/[\u00d7\u00b7]/g,'*').replace(/\u00f7/g,'/').replace(/[{\[]/g,'(').replace(/[}\]]/g,')').replace(/\s+/g,'');
+  if(s.indexOf('=')>-1)s=s.slice(s.lastIndexOf('=')+1);
+  s=s.replace(/(\d),(?=\d{3}(\D|$))/g,'$1').replace(/(\d(?:\.\d+)?)e([+-]?\d+)/g,'($1*10^($2))');
+  if(!s)throw new Error('empty');
+  var re=/(\d+\.?\d*|\.\d+)|([a-z]+)|([()+\-*\/^])/g,toks=[],m,last=0;
+  while((m=re.exec(s))){
+    if(m.index!==last)throw new Error('bad');last=re.lastIndex;
+    if(m[1]!==undefined)toks.push({t:'n',v:parseFloat(m[1])});
+    else if(m[2]){var w=m[2];
+      if(w==='ln'||w==='exp'||w==='sqrt')toks.push({t:'f',v:w});
+      else if(w==='e')toks.push({t:'e'});else throw new Error('sym');}
+    else toks.push({t:'o',v:m[3]});
+  }
+  if(last!==s.length)throw new Error('bad');
+  var pos=0;
+  function pk(){return toks[pos];}
+  function isOp(t,v){return t&&t.t==='o'&&t.v===v;}
+  function atomStart(t){return t&&(t.t==='n'||t.t==='e'||t.t==='f'||isOp(t,'('));}
+  function pExpr(){var a=pTerm();while(isOp(pk(),'+')||isOp(pk(),'-')){var op=toks[pos++].v,b=pTerm();a=op==='+'?a+b:a-b;}return a;}
+  function pTerm(){var a=pUn();for(;;){var t=pk();
+    if(isOp(t,'*')||isOp(t,'/')){pos++;var b=pUn();a=t.v==='*'?a*b:a/b;}
+    else if(atomStart(t)){a=a*pUn();}else break;}return a;}
+  function pUn(){if(isOp(pk(),'-')){pos++;return -pUn();}if(isOp(pk(),'+')){pos++;return pUn();}return pPow();}
+  function pPow(){var b=pAtom();if(isOp(pk(),'^')){pos++;var neg=false;if(isOp(pk(),'-')){pos++;neg=true;}
+    var x=pAtom();while(pk()&&(pk().t==='n'||pk().t==='e')){x=x*pAtom();}if(neg)x=-x;return Math.pow(b,x);}return b;}
+  function pAtom(){var t=toks[pos++];if(!t)throw new Error('end');
+    if(t.t==='n')return t.v;if(t.t==='e')return Math.E;
+    if(t.t==='f'){var a=pAtom();return t.v==='ln'?Math.log(a):t.v==='exp'?Math.exp(a):Math.sqrt(a);}
+    if(isOp(t,'(')){var v=pExpr();if(!isOp(pk(),')'))throw new Error('paren');pos++;return v;}
+    throw new Error('tok');}
+  var v=pExpr();if(pos!==toks.length||!isFinite(v))throw new Error('bad');return v;
+}
+
+/* ================= helpers and widgets ================= */
+var ORDER=[],ACTS={},MODS=[];
+function A(id,d){d.id=id;ACTS[id]=d;ORDER.push(id);return '<div data-act="'+id+'"></div>';}
+function fig(src,alt,cap,cls){return '<figure'+(cls?' class="'+cls+'"':'')+'><img src="img/'+src+'.jpg" alt="'+alt+'"><figcaption>'+cap+'</figcaption></figure>';}
+function mod(short,title,time,body){var ids=[],re=/data-act="([^"]+)"/g,m;while((m=re.exec(body)))ids.push(m[1]);MODS.push({short:short,title:title,time:time,body:body,acts:ids});}
+function more(title,html){return '<details><summary>'+title+'</summary>'+html+'</details>';}
+function $q(b,s){return b.querySelector(s);}
+
+function mountLayers(box,done){
+  var D=[['Troposphere','The lowest layer, where we live and where weather and most air pollution occur. It holds most of the atmosphere’s mass: even at Mount Everest (8.85 km) the pressure is only 28% of sea level.'],
+    ['Stratosphere','Above the troposphere. The main concentration of the ozone layer sits here, roughly 15 to 35 km up, and temperature rises with height.'],
+    ['Mesosphere','Above the stratosphere. Temperature falls again with height. By 50 km the pressure is only 0.1% of sea level.'],
+    ['Thermosphere','The outermost layer shown. Temperature climbs steeply, and the ionosphere and magnetosphere begin here. At 90 km the pressure is 0.0001% of sea level.']];
+  box.innerHTML='<div class="sph">'+D.map(function(s,i){return '<button type="button" data-k="'+i+'">'+s[0]+'</button>';}).join('')+'</div><div class="panel" aria-live="polite">Select each layer to see what happens there.</div>';
+  var seen={},n=0,p=$q(box,'.panel');
+  Array.prototype.forEach.call(box.querySelectorAll('button'),function(b){b.onclick=function(){Array.prototype.forEach.call(box.querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on','seen');
+    var k=+b.dataset.k;p.innerHTML='<b>'+D[k][0]+'.</b> '+D[k][1];if(!seen[k]){seen[k]=1;n++;}if(n===4)done();};});
+}
+function mountInversion(box,done){
+  box.innerHTML='<div class="sph"><button type="button" data-k="0">Normal day</button><button type="button" data-k="1">Thermal inversion</button></div><svg class="w" viewBox="0 0 440 250" role="img" aria-label="Diagram of smoke from a stack rising on a normal day and trapped under a warm air layer during an inversion"></svg><div class="panel" aria-live="polite">Compare the two situations.</div>';
+  var seen={};
+  function draw(k){var s='<rect x="0" y="0" width="440" height="250" fill="#EAF3F8"/><rect x="0" y="214" width="440" height="36" fill="#6B8F5A"/><rect x="205" y="150" width="14" height="64" fill="#7A7A7A"/>';
+    if(k===0){s+='<text x="12" y="30">Air cools with height: warm air near the ground can rise</text>';
+      for(var i=0;i<14;i++)s+='<circle cx="'+(212+Math.sin(i)*(8+i*4))+'" cy="'+(145-i*9)+'" r="'+(4+i*0.6)+'" fill="#8A8F94" opacity="'+(0.85-i*0.04)+'"/>';
+      s+='<path d="M60 215 L60 60" stroke="#C0392B" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="40" y="238" style="fill:#fff">warm</text>';}
+    else{s+='<rect x="0" y="82" width="440" height="22" fill="#F1C400" opacity=".75"/><text x="12" y="98" style="font-weight:bold">layer of warm air</text><text x="12" y="30">Warm air sits above cooler air near the ground</text><text x="12" y="204" style="fill:#2F3A33">cooler air</text>';
+      for(var j=0;j<18;j++)s+='<circle cx="'+(60+j*20+Math.sin(j*2)*8)+'" cy="'+(190-Math.abs(Math.cos(j))*70)+'" r="6" fill="#8A8F94" opacity=".8"/>';}
+    $q(box,'svg').innerHTML=s;}
+  var T=['On a normal day, warm air near the ground rises, carrying pollutants up so they disperse.','In an inversion, a layer of warm air overlies cooler air near the ground. It prevents the rising and dispersion of air pollutants, which build up near the ground.'];
+  draw(0);
+  Array.prototype.forEach.call(box.querySelectorAll('.sph button'),function(b){b.onclick=function(){var k=+b.dataset.k;draw(k);$q(box,'.panel').textContent=T[k];Array.prototype.forEach.call(box.querySelectorAll('.sph button'),function(x){x.classList.remove('on');});b.classList.add('on','seen');seen[k]=1;if(seen[0]&&seen[1])done();};});
+}
+function mountPH(box,done){
+  var E=[[4.2,'All fish die (4.2). Acid rain measures about 4.2 to 4.4.'],[5.5,'Frog eggs, tadpoles, crayfish and mayflies die (5.5). Clean rain is about 5.6.'],[6.0,'Rainbow trout begin to die (6.0).'],[6.5,'A healthy lake is about 6.5. Milk is 6.5 to 6.8.'],[7,'Neutral: pure water.']];
+  box.innerHTML='<label for="phs"><b>pH</b></label><br><input type="range" id="phs" min="0" max="14" step="0.1" value="7"><div class="read" id="phr"></div><div class="panel" id="php" aria-live="polite"></div>';
+  var seen={};
+  function upd(){var v=+$q(box,'#phs').value,f=Math.pow(10,7-v),note='';E.forEach(function(e){if(Math.abs(v-e[0])<0.15)note=e[1];});
+    $q(box,'#phr').innerHTML='pH <b>'+v.toFixed(1)+'</b>: about <b>'+(f>=1?fm(f,f<10?1:0)+' times as many':fm(1/f,(1/f)<10?1:0)+' times fewer')+'</b> hydrogen ions as neutral water';
+    $q(box,'#php').textContent=note||(v<7?'Acidic side of the scale.':v>7?'Basic side of the scale.':'Neutral.');seen[Math.round(v)]=1;if(Object.keys(seen).length>=6)done();}
+  $q(box,'#phs').addEventListener('input',upd);upd();
+}
+
+/* ================= modules 1-3 ================= */
+mod('The atmosphere','1. The atmosphere and its pollutants','About 10 minutes',
+`<p>This self-guided lesson turns your <i>The Atmosphere and Air Pollution</i> slides into steps you work through yourself. Read a short section, then do the activities beneath it. Every activity gives feedback, you can retry as often as you like, and after two misses a “Show me the answer” button appears.</p>
+<h3>Layers of the atmosphere</h3>
+<p>Air is about 78% nitrogen and 21% oxygen, with 1% other gases. It is arranged in layers, and pressure drops quickly with height.</p>
+${fig('layers','Chart of Earth’s atmosphere by altitude showing the troposphere, stratosphere, mesosphere and thermosphere, the temperature curve, the ozone layer in the stratosphere and how pressure falls with height','Earth’s atmosphere: layers, temperature and pressure.','narrow')}
+${A('layersExplore',{type:'explore',q:'Select each layer to learn what happens there.',mount:mountLayers,done:'Most air pollution is a problem in the troposphere, the layer closest to us.'})}
+${A('compForm',{type:'form',q:'Use the composition numbers above.',
+ fields:[{label:'The “other” gases make up what percent of air?',ans:1,tolAbs:0.01,unit:'%',wrong:[{t:function(x){return x===99||x===21;},m:'Subtract both 78 and 21 from 100.'}],m:'100 − 78 − 21 = ?'},
+  {label:'Nitrogen is about how many times as abundant as oxygen? (one decimal place)',ans:78/21,tol:0.03,unit:'times',m:'Divide 78 by 21.'}],
+ why:'Nitrogen and oxygen together are about 99% of air. Pollutants are tiny fractions, yet they matter for health.',worked:'100 − 78 − 21 = 1, and 78 ÷ 21 ≈ 3.7.'})}
+${A('ozoneMcq',{type:'mcq',q:'Ozone appears in two places in your slides. Which statement is correct?',opts:[{t:'The ozone layer is in the stratosphere. Ozone near the ground (in the troposphere) is a pollutant and the main component of photochemical smog.'},
+  {t:'Ozone is helpful everywhere in the atmosphere',fb:'Tropospheric (ground-level) ozone can damage living tissue and is the primary component of photochemical smog.'},
+  {t:'The ozone layer is in the troposphere, next to the ground',fb:'Look at the figure: the main concentration of the ozone layer is in the stratosphere.'},
+  {t:'Ground-level ozone is released directly from tailpipes',fb:'Tropospheric ozone is a secondary pollutant. It forms from chemical reactions rather than being emitted directly.'}],ans:0,
+  why:'Same molecule, very different roles: protective high up in the stratosphere, harmful at ground level.'})}
+<h3>Primary and secondary pollutants</h3>
+<p>An <b>atmospheric pollutant</b> is any substance, from human or natural sources, that can “injure health, harm the environment and cause property damage” (EPA). A <b>primary pollutant</b> is hazardous as emitted (for example soot or carbon monoxide). A <b>secondary pollutant</b> is produced by chemical reactions in the air (for example tropospheric ozone or sulfuric acid).</p>
+${A('priSec',{type:'classify',q:'Is each pollutant primary or secondary?',cats:['Primary (directly harmful as emitted)','Secondary (made by reactions)'],
+ items:[{t:'Soot',c:0,hint:'Soot is emitted directly.'},{t:'Carbon monoxide',c:0,hint:'It is a direct product of combustion.'},{t:'Tropospheric ozone',c:1,hint:'It forms when VOCs and nitrogen oxides react in sunlight.'},
+  {t:'Sulfuric acid',c:1,hint:'It forms when sulfur dioxide reacts with oxygen and water.'},{t:'Nitric acid',c:1,hint:'It forms when nitrogen dioxide reacts with oxygen and water.'}],
+ why:'Primary pollutants are emitted as they are. Secondary pollutants such as ozone and the acids are formed afterward, which is why controlling them means controlling their ingredients.'})}`);
+
+mod('Smog and inversions','2. Smog, stacks and inversions','About 15 minutes',
+`<p>Common tropospheric pollutants formed by combustion reactions include nitrogen oxides (NO<sub>x</sub>), sulfur oxides (SO<sub>x</sub>), CO<sub>2</sub>, CO, CH<sub>4</sub>, volatile organic compounds (VOCs) and particulate matter. Depending on the mix and the weather, they produce two very different kinds of smog.</p>
+<div class="pair">${fig('smogla','Brown haze of photochemical smog over a city skyline','Photochemical smog: brown air.')}${fig('indsmog','Gray industrial smog over a city','Industrial smog: gray air.')}</div>
+<p><b>Photochemical smog</b> (brown-air smog) forms under the influence of sunlight and is a mixture of primary and secondary pollutants. Nitrogen and oxygen form NO<sub>2</sub> (amber-orange in color), and VOCs lead to tropospheric ozone. It is common on still, sunny summer days with little wind, especially in large cities.</p>
+<p><b>Industrial smog</b> (gray-air smog) is a mixture of SO<sub>x</sub>, sulfuric acid and particulate matter (aerosols, soot) from burning fossil fuels. It is a problem where pollution control is inadequate. (Aerosols are suspended solid particles and droplets.)</p>
+${A('smogSort',{type:'classify',q:'Match each description to the kind of smog.',cats:['Photochemical smog','Industrial smog'],
+ items:[{t:'Brown-air smog',c:0,hint:'Think of the color of the haze.'},{t:'Forms under the influence of sunlight',c:0,hint:'The name hints at light-driven reactions.'},{t:'Tropospheric ozone is its primary component',c:0,hint:'Ozone forms from VOCs and nitrogen oxides in sunlight.'},
+  {t:'Gray-air smog',c:1,hint:'Think of the color of the haze.'},{t:'Mixture of SO<sub>x</sub>, sulfuric acid and particulate matter',c:1,hint:'Sulfur compounds come from burning fossil fuels.'},{t:'A problem where pollution control is inadequate',c:1,hint:'Scrubbers and other controls remove most of these pollutants.'}],
+ why:'Photochemical smog is a sunlight-driven mix dominated by ozone. Industrial smog is a sulfur-and-particulate mix from burning fossil fuels.'})}
+<h3>Stacks: scrubbers and the “dilution solution”</h3>
+<p>Most factory and power plant smokestacks remove the majority of atmospheric pollutants with “scrubbers.” A visible plume is not necessarily a sign of the worst pollution. The “dilution solution” builds taller stacks so pollutants mix into a larger volume of air.</p>
+${A('scrubMcq',{type:'mcq',q:'What do scrubbers do?',opts:[{t:'Remove most pollutants from the exhaust before it leaves the stack'},{t:'Make the stack taller so smoke spreads out',fb:'That is the “dilution solution,” a different approach.'},{t:'Turn exhaust into harmless water vapor only',fb:'Scrubbers capture pollutants. They do not simply convert everything to water vapor.'},{t:'Block sunlight so smog cannot form',fb:'Scrubbers act on the exhaust, not on sunlight.'}],ans:0,
+  why:'Pay for scrubbers now, or pay for medical care later. Controls at the source are far more effective than hoping dispersion will solve the problem.'})}
+${A('dilutionMcq',{type:'mcq',q:'What is the main trade-off of the “dilution solution” (taller smokestacks)?',opts:[{t:'It reduces local pollution but increases regional pollution'},{t:'It removes the pollutants permanently',fb:'Nothing is removed. The pollutants are spread over a larger volume of air.'},{t:'It increases pollution right at the stack',fb:'Local concentrations near the stack drop. It is farther away that the problem moves.'},{t:'It has no effect on where pollutants go',fb:'Taller stacks release pollutants higher, so they travel farther before settling.'}],ans:0,
+  why:'Dilution moves the problem downwind. That matters again in the acid deposition module.'})}
+<h3>Thermal inversions</h3>
+<p>Normally air near the ground is warmer than the air above it, so it rises and carries pollutants away. In a <b>temperature (thermal) inversion</b>, a layer of warm air overlies cooler air near the ground. This weather phenomenon prevents the rising and dispersion of air pollutants.</p>
+${fig('inv1','Two diagrams comparing normal air rising from a city with an inversion where a warm layer traps air near the ground','Normal conditions (top) and an inversion (bottom).','narrow')}
+${A('inversionExplore',{type:'explore',q:'Compare a normal day with a thermal inversion.',mount:mountInversion,done:'Under an inversion the pollutants have nowhere to go, so concentrations climb.'})}
+${A('inversionOrder',{type:'order',q:'Put the steps of how an inversion traps pollution in order.',
+ items:['A layer of warm air settles over cooler air near the ground.','The cool air near the ground can no longer rise through the warm layer.','Pollutants are prevented from rising and dispersing.','Pollutant concentrations build up near the ground.'],
+ nudge:'Start with how the layers of air are arranged, then follow what that does to rising air, and finally to the pollutants.',why:'The warm layer acts like a lid. Smog episodes get worse the longer an inversion lasts.'})}`);
+
+mod('Ozone and health','3. Ground-level ozone and health','About 10 minutes',
+`<p><b>Tropospheric (ground-level) ozone</b> is the primary component of photochemical smog. It can damage living tissue, and its concentrations vary in space and time.</p>
+<div class="pair">${fig('ozmap','Map of the United States shaded by ambient ozone exposure, 1996 to 2002, with the highest exposures in a few regions','Ambient ozone exposure across the U.S. (1996 to 2002).')}${fig('ozyield','Graph of proportional crop yield response against ozone concentration in parts per billion for wheat and corn, cotton and peanuts','Crop yield response to ozone. Yield falls as ozone rises.')}</div>
+${A('ozYield',{type:'form',q:'Read the crop-yield graph at an ozone concentration of 100 ppb. A response of 100 means no loss. Estimates are fine.',
+ fields:[{label:'Proportional yield response for wheat and corn',ans:85,tolAbs:5,unit:'',m:'Find 100 ppb on the horizontal axis and read up to the wheat and corn line.'},
+  {label:'Proportional yield response for peanuts',ans:40,tolAbs:5,unit:'',m:'Find 100 ppb on the horizontal axis and read up to the lowest line.'},
+  {label:'About what percent of the peanut yield is lost at 100 ppb?',ans:60,tolAbs:6,unit:'%',wrong:[{t:function(x){return x>=35&&x<=45;},m:'That is the remaining yield. The loss is 100 minus that.'}],m:'Loss = 100 minus the yield response.'}],
+ why:'Ozone harms crops as well as people, and some crops are far more sensitive than others.',worked:'Wheat and corn are near 85, peanuts near 40, so peanuts lose about 60%.'})}
+${A('ozMcq',{type:'mcq',q:'Which statement about tropospheric ozone is supported by your slides?',opts:[{t:'It can damage living tissue, and its concentrations vary from place to place and over time'},{t:'It is the same everywhere in the United States',fb:'The ozone map shows large differences between regions.'},{t:'It harms people but never crops',fb:'The yield graph and the leaf damage images show crops are affected.'},{t:'It is emitted directly by smokestacks',fb:'It is a secondary pollutant formed by reactions in sunlight.'}],ans:0,
+  why:'Ozone exposure differs by place, season and weather, and it injures plants as well as people.'})}
+<h3>Impacts of smog on humans</h3>
+<p>Smog causes coughing, breathing problems, and eye, nose and throat irritation. It aggravates asthma, emphysema and heart disease, and reduces resistance to disease.</p>
+${A('smogHealth',{type:'short',q:'Explain why a smog episode is more dangerous for someone with asthma, emphysema or heart disease than for a healthy person.',min:15,need:2,
+ rub:[{re:/aggravat|worsen|worse|trigger|already|vulnerab|sensitive|susceptible|more likely|extra stress|attack/i,m:'Say what smog does to an existing condition: does it make it better, worse, or set off an attack?'},
+  {re:/breath|lung|airway|respirat|heart|irritat|cough|inflam/i,m:'Name the body system involved, such as the airways, lungs or heart.'}],
+ ok:'Smog adds stress to systems that are already struggling.',model:'Smog irritates the airways and makes breathing harder, so it aggravates conditions like asthma, emphysema and heart disease that already limit the lungs or heart. People with those conditions have less reserve and are more likely to have attacks.'})}`);
+
+/* ================= modules 4-6 ================= */
+mod('Acid deposition','4. Acid deposition','About 20 minutes',
+`<h3>Review: acids, bases and pH</h3>
+<p><b>Acids</b> donate protons (H<sup>+</sup>) to water to form hydronium ions (H<sub>3</sub>O<sup>+</sup>) and taste sour. <b>Bases</b> accept protons (and donate hydroxyl groups, OH<sup>−</sup>); they taste bitter and feel slippery. <b>pH</b> measures hydrogen ion concentration on a <b>logarithmic</b> scale, so each step of 1 pH unit is a tenfold change.</p>
+${fig('phscale','pH scale from 0 to 14 with environmental effects, such as all fish dying at 4.2, and examples such as acid rain at 4.2 to 4.4 and clean rain at 5.6','The pH scale with environmental effects and examples.','narrow')}
+${A('phExplore',{type:'explore',q:'Slide the pH up and down and watch the number of hydrogen ions and the effects on living things.',mount:mountPH,done:'Small changes in pH mean large changes in acidity, and sensitive species disappear well before the water looks “acidic.”'})}
+${A('phForm',{type:'form',q:'Because pH is logarithmic, each unit is a factor of 10. Work these out (a calculator is fine, for example 10^2).',
+ fields:[{label:'How many times more hydrogen ions does pH 4 have than pH 6?',ans:100,tol:0.01,unit:'times',wrong:[{t:function(x){return x===2;},m:'That is the difference in pH. Each unit is a factor of 10, so use 10 raised to that difference.'}],m:'The difference is 2 pH units, so 10 × 10.'},
+  {label:'Acid rain (pH 4.2) versus clean rain (pH 5.6): how many times more hydrogen ions? (nearest whole number)',ans:Math.pow(10,1.4),tol:0.05,unit:'times',wrong:[{t:function(x){return Math.abs(x-1.4)<0.05;},m:'That is the pH difference. Raise 10 to that power.'}],m:'The difference is 5.6 − 4.2 = 1.4 pH units. Compute 10^1.4.'}],
+ why:'A modest-looking pH gap hides a big change in acidity. Acid rain at pH 4.2 has about 25 times the hydrogen ions of clean rain.',worked:'10^2 = 100 and 10^1.4 ≈ 25.'})}
+<h3>Where acid-forming pollutants come from</h3>
+<p>About half of acid-forming pollutants are sulfur compounds from industry and power plants. Of the nitrogen compounds, about 50% come from transportation sources.</p>
+${A('srcMcq',{type:'mcq',q:'According to your slides, what is the main source of the sulfur pollutants that form acid?',opts:[{t:'Industry and power plants'},{t:'Transportation',fb:'Transportation is the major source of the nitrogen compounds, about half of them.'},{t:'Household products',fb:'Household products matter for indoor air, not for acid deposition.'},{t:'Volcanoes only',fb:'Natural sources exist, but the slides identify industry and power plants as the main source of sulfur pollutants.'}],ans:0,
+  why:'Burning fossil fuels at industrial and power sources drives sulfur emissions, while transportation drives much of the nitrogen.'})}
+<h3>How the acids form, and how they land</h3>
+<p>In the atmosphere, sulfur dioxide reacts with oxygen and water to make sulfuric acid, and nitrogen dioxide makes nitric acid. <b>Wet deposition</b> is acid delivered by rain, fog, snow and so on. <b>Dry deposition</b> is dry acidic particles landing on surfaces. These terms describe the transfer process, not whether the surface itself is wet.</p>
+${fig('aciddep','Diagram of acid deposition showing sunlight-driven oxidation of sulfur and nitrogen oxides into sulfuric and nitric acids that fall as acid rain, with wet and dry deposition labeled','Acid deposition: oxidation in the atmosphere, then wet or dry deposition.')}
+${A('acidChem',{type:'classify',q:'Which acid does each pollutant form?',cats:['Sulfuric acid (H₂SO₄)','Nitric acid (HNO₃)'],
+ items:[{t:'Sulfur dioxide (SO₂) reacting with oxygen and water',c:0,hint:'Sulfur gives a sulfur-based acid.'},{t:'Nitrogen dioxide (NO₂) reacting with oxygen and water',c:1,hint:'Nitrogen gives a nitrogen-based acid.'}],
+ why:'SO₂ leads to H₂SO₄ and NO₂ leads to HNO₃. These secondary pollutants are what make precipitation acidic.'})}
+${A('depSort',{type:'classify',q:'Is each an example of wet or dry deposition?',cats:['Wet deposition','Dry deposition'],
+ items:[{t:'Acidic rain',c:0,hint:'It arrives in precipitation.'},{t:'Acidic fog',c:0,hint:'Water droplets deliver the acid.'},{t:'Acidic snow',c:0,hint:'It arrives in precipitation.'},
+  {t:'Dry acidic particles settling onto a building',c:1,hint:'No water is carrying the acid.'},{t:'Acidic gases and particles settling out of the air onto leaves',c:1,hint:'The acid settles out without precipitation.'}],
+ why:'Wet deposition is acid carried by water in the air. Dry deposition is acid settling out as gases and particles. Both are part of acid deposition.'})}
+<h3>Where it lands: the pattern of acidity</h3>
+${fig('phmap','Map of the United States showing the acidity of precipitation measured in 2006, with the most acidic precipitation in the eastern states downwind of the Ohio Valley','Hydrogen ion concentration (pH) of precipitation, 2006. A large concentration of power plants sits in the Ohio Valley.')}
+${A('mapMcq',{type:'mcq',q:'What pattern does the pH map show, and why?',opts:[{t:'Precipitation is most acidic downwind of the large concentration of power plants in the Ohio Valley'},{t:'Precipitation is most acidic in the dry western states',fb:'The map shows the western states with the least acidic precipitation (green).'},{t:'Acidity is the same everywhere',fb:'The map shades acidity from green (less acidic) to orange (more acidic), and the shading changes across the country.'},{t:'Acidity is highest right at the equator',fb:'The map shows the United States, and the pattern follows pollution sources and prevailing winds.'}],ans:0,
+  why:'Pollutants travel with the wind, so the damage appears downwind of the sources, not at the stacks. This connects back to the “dilution solution.”'})}
+<h3>Why the same acid rain hurts some places more</h3>
+<p><b>Buffering capacity</b> is the ability of soil or water to minimize the change in acidity when an acid or base is added.</p>
+${A('bufferMcq',{type:'mcq',q:'Two lakes receive the same amount of acid rain. Lake A has good buffering capacity and Lake B has poor buffering capacity. What do you expect?',opts:[{t:'Lake A’s pH stays higher (closer to its original value) than Lake B’s'},{t:'Both lakes end up with the same pH',fb:'Buffering capacity is exactly what makes the same acid input produce different results.'},{t:'Lake B’s pH stays higher',fb:'Poor buffering means the acid changes the pH more, so Lake B’s pH falls further.'},{t:'Neither lake changes',fb:'Buffering reduces the change but does not remove it, especially under continued acid input.'}],ans:0,
+  why:'Good buffering neutralizes acid compounds, so pH changes less. Poor buffering lets acidity build up.'})}
+<h3>Case study: the Adirondack Mountains</h3>
+${fig('acidharm','Four images of acid rain effects: an eroded stone face, dead trees, a lake being treated and a damaged maple leaf','Effects of acid deposition: eroded stone, dead trees, a lake being neutralized and a damaged maple leaf.','mid')}
+<p>Acidic precipitation falls as rain and snow in the Adirondacks. The soils and bedrock cannot buffer the increased acidity, so lakes and streams are affected, with fish kills and lower biodiversity. New York State is downwind of many industrialized areas and large coal-burning power plants of the Ohio River Valley. In 1996, power plants in Ohio produced six times more sulfur dioxide and eight times more nitrogen oxides than power plants in New York State.</p>
+${A('ohioForm',{type:'form',q:'Illustrative numbers (not real data): suppose New York State’s power plants emitted 100 units of sulfur dioxide and 100 units of nitrogen oxides. Using the 1996 ratios from the slides, how much did Ohio’s plants emit?',
+ fields:[{label:'Sulfur dioxide from Ohio plants',ans:600,tol:0.01,unit:'units',m:'The slides say six times more.'},{label:'Nitrogen oxides from Ohio plants',ans:800,tol:0.01,unit:'units',m:'The slides say eight times more.'}],
+ why:'Ohio’s emissions dwarf New York’s, and prevailing winds carry them east. This is why New York works with the EPA on acid deposition levels.',worked:'6 × 100 = 600 and 8 × 100 = 800.'})}
+${A('adirondack',{type:'short',q:'Explain why Adirondack lakes and streams suffer from acid deposition. Use at least three ideas from the case study.',min:25,need:3,
+ rub:[{re:/downwind|ohio|wind|power plants?|coal|industrial|upwind/i,m:'Say where the pollution comes from and how it reaches the Adirondacks.'},
+  {re:/buffer|neutraliz|bedrock|soil/i,m:'Say what soils and bedrock there cannot do.'},
+  {re:/fish|lake|stream|biodiversity|species|acidic|ph/i,m:'Say what happens to the lakes, streams or living things.'}],
+ ok:'Source, pathway and a place that cannot absorb the acid: that is the whole story.',model:'Coal-burning power plants and industry in the Ohio River Valley are upwind, so acidic precipitation falls on the Adirondacks as rain and snow. The soils and bedrock there cannot buffer the extra acidity, so lakes and streams become more acidic, causing fish kills and lower biodiversity.'})}`);
+
+mod('Solutions','5. Air pollution solutions','About 8 minutes',
+`<p>Your slides group solutions into <b>prevention</b> (do not produce the pollutant) and <b>dispersion or cleanup</b> (handle it after it forms). Prevention is usually the stronger choice because cleanup and dilution only move or capture what has already been produced.</p>
+${A('solSort',{type:'classify',q:'Is each action prevention, or dispersion or cleanup?',cats:['Prevention','Dispersion or cleanup'],
+ items:[{t:'Use low-sulfur coal',c:0,hint:'It produces less sulfur dioxide in the first place.'},{t:'Remove sulfur from coal before burning',c:0,hint:'It happens before combustion.'},{t:'Shift to cleaner fuels',c:0,hint:'Less pollution is made.'},{t:'Mass transit, bicycles and walking',c:0,hint:'Fewer vehicle emissions are produced.'},{t:'Increase fuel efficiency',c:0,hint:'Less fuel burned means less pollution made.'},
+  {t:'Use tall smokestacks',c:1,hint:'This disperses pollution after it forms.'},{t:'Remove pollutants after combustion',c:1,hint:'It happens after the pollutant is formed.'},{t:'Emission control devices on vehicles',c:1,hint:'They treat the exhaust after combustion.'},{t:'Stricter exhaust inspection standards',c:1,hint:'They catch and fix emissions problems after the fact.'},{t:'Tax pollution',c:1,hint:'The slides list this under dispersion or cleanup.'}],
+ why:'Prevention changes what is produced. Dispersion and cleanup deal with what has already been produced.'})}
+${A('solMcq',{type:'mcq',q:'Why is dispersion (tall smokestacks) a weaker solution than prevention?',opts:[{t:'It reduces local pollution but increases regional pollution, so the problem moves downwind'},{t:'It makes the pollutants disappear',fb:'The pollutants still exist. They are just spread out.'},{t:'It only works at night',fb:'Nothing in your slides ties it to time of day.'},{t:'It increases pollution near the stack',fb:'Local concentrations fall. The cost is paid downwind.'}],ans:0,
+  why:'Tall stacks helped cause the regional acid deposition you studied. Preventing the pollution avoids moving it.'})}`);
+
+mod('Indoor air','6. Indoor air pollution','About 15 minutes',
+`<h3>The problem</h3>
+<p>Indoor air can be more polluted than outdoor air, and people spend about 90% of their time indoors, which raises the risk. Several things combine: cumulative effects from multiple sources, inadequate ventilation, and high temperature and humidity. The people who spend the most time indoors, such as the young, the elderly and the chronically ill, are often the most susceptible (EPA).</p>
+${A('indoorForm',{type:'form',q:'People spend about 90% of their time indoors.',
+ fields:[{label:'In a 24-hour day, about how many hours is that?',ans:21.6,tol:0.02,unit:'hours',m:'Multiply 24 by 0.90.'},{label:'About how many hours a day does that leave outdoors?',ans:2.4,tol:0.03,unit:'hours',m:'Subtract your first answer from 24.'}],
+ why:'Almost the whole day is spent breathing indoor air, so even modest indoor pollution adds up.',worked:'24 × 0.90 = 21.6 and 24 − 21.6 = 2.4.'})}
+${A('indoorMcq',{type:'mcq',q:'Which best explains why indoor air can carry a greater health risk than outdoor air?',opts:[{t:'We spend about 90% of our time indoors, several sources add up, and poor ventilation lets pollutants build up'},{t:'There is never any ventilation indoors',fb:'Ventilation varies. The risk comes from inadequate ventilation, not from none at all.'},{t:'Indoor air only contains natural substances',fb:'Indoor air can hold chemicals, combustion products and biological contaminants.'},{t:'People spend most of their time outdoors',fb:'The slides say about 90% of time is spent indoors.'}],ans:0,
+  why:'Time, many sources and too little ventilation together explain the risk, even if each source alone seems minor.'})}
+<h3>Sources</h3>
+<p>The most dangerous indoor air pollutants in developed countries (EPA) include tobacco smoke; formaldehyde, asbestos and lead; radioactive radon-222 gas and carbon monoxide; very small fine and ultrafine particles; biological contaminants (mold, pollen); and household products and pesticides. Formaldehyde comes from pressed wood products, building materials, smoking, household products and unvented fuel-burning appliances.</p>
+${fig('house','Cutaway of a house showing sources of indoor air pollutants such as formaldehyde, radon, tobacco smoke, asbestos, carbon monoxide and household chemicals','Common indoor air pollutants and where they come from.','mid')}
+${A('indoorSort',{type:'classify',q:'Sort these indoor pollutants by type.',cats:['Biological contaminant','Radioactive gas','Chemical or combustion product'],
+ items:[{t:'Mold',c:0,hint:'It is a living organism.'},{t:'Pollen',c:0,hint:'It comes from plants.'},{t:'Radon-222',c:1,hint:'It is a radioactive gas from soil and rock.'},{t:'Formaldehyde',c:2,hint:'It is a chemical used in building materials and products.'},{t:'Carbon monoxide',c:2,hint:'It is a combustion product.'},{t:'Tobacco smoke',c:2,hint:'It is a mixture produced by burning.'}],
+ why:'Different types need different controls: moisture control for mold, testing for radon, and source control and ventilation for chemicals and combustion products.'})}
+<h3>Case study: radon</h3>
+<div class="pair">${fig('radon','Cutaway diagram showing how radon gas enters a home from soil through cracks in the foundation','How radon-222 enters a home.')}${fig('nyradon','Map of New York State counties highlighting those with high radon levels','New York counties with high radon levels (NYS Department of Health).')}</div>
+<p>Radon-222 is a radioactive gas found in some soils and rocks. It can seep into homes through openings in the foundation, and it increases the risk of lung cancer. You cannot see, smell or taste it.</p>
+<div class="callout"><b>Update on the numbers.</b> Your speaker notes cite an EPA estimate of about 14,000 radon-related deaths a year (range 7,000 to 30,000). That was EPA’s earlier estimate. EPA’s updated best estimate is about 21,000 lung cancer deaths a year (range roughly 8,000 to 45,000), and radon remains the second leading cause of lung cancer after smoking.</div>
+${A('radonMcq',{type:'mcq',q:'How does radon-222 usually get into a home?',opts:[{t:'It seeps up from soil and rock through openings in the foundation'},{t:'It is released by smokestacks and carried inside',fb:'Radon comes from the natural breakdown of uranium and radium in soil and rock, not from stacks.'},{t:'It is given off by cooking',fb:'Cooking is a source of other indoor pollutants, but radon comes from the ground.'},{t:'It has a strong smell that warns you',fb:'It is colorless and odorless, which is why testing matters.'}],ans:0,
+  why:'Because radon cannot be sensed, testing is the only way to know. Any home, new or old, may have a radon problem.'})}
+<h3>Mold</h3>
+<p>Indoor mold growth is controlled by controlling moisture. Health effects include allergic reactions, asthma and other respiratory problems.</p>
+${A('moldMcq',{type:'mcq',q:'What is the key to controlling indoor mold?',opts:[{t:'Controlling moisture'},{t:'Raising the temperature of the whole house',fb:'Heat is not the key. Mold grows where moisture is available.'},{t:'Using more household cleaning products',fb:'More chemicals add other indoor pollutants and do not remove the moisture that feeds mold.'},{t:'Keeping windows sealed',fb:'Sealing a home can worsen ventilation and humidity problems.'}],ans:0,
+  why:'No moisture, no mold growth. Fix leaks and manage humidity.'})}
+<h3>Air pollution is a big killer, and what you can do</h3>
+<p>Your slides report that air pollution prematurely kills about 3 million people each year, mostly from indoor air pollution in developing countries, and that the EPA estimates annual deaths related to indoor and outdoor air pollution in the U.S. range from 150,000 to 350,000. These figures come from older sources, so check current estimates before quoting them.</p>
+<p>Actions your slides suggest: test for radon and formaldehyde and fix problems; avoid furniture and products with formaldehyde; remove shoes at the door to cut dust, lead and pesticides; test pre-1980 homes for asbestos and lead; do not store gasoline or solvents inside a home or attached garage; smoke outside; make sure wood stoves, fireplaces and gas or kerosene heaters are properly installed, vented and maintained; and install carbon monoxide detectors in all sleeping areas.</p>
+${A('topThree',{type:'short',q:'Which three of these actions do you think are the most important, and why? Name all three and give a reason for your choices.',min:25,need:2,
+ rub:[{fn:function(t){var cats=[/radon|test/i,/formaldehyde|furniture/i,/shoes|dust/i,/asbestos|pre-1980|lead/i,/gasoline|solvent|garage/i,/smok/i,/stove|fireplace|heater|vent/i,/carbon monoxide|detector|co detector/i],n=0;cats.forEach(function(r){if(r.test(t))n++;});return n>=3;},m:'Name three different actions, for example testing for radon, carbon monoxide detectors, or venting heaters.'},
+  {re:/because|since|so that|reduce|prevent|risk|can\'t|cannot|danger|kill|cancer|poison|silent|odorless|colorless|health/i,m:'Give a reason: why do those three matter most?'},
+],
+ ok:'Choosing and justifying is the skill: the best actions tend to address hazards you cannot sense.',model:'I would test for radon, install carbon monoxide detectors in sleeping areas, and make sure heaters and stoves are vented, because radon and carbon monoxide are invisible and odorless, so you cannot rely on your senses, and both can seriously harm health.'})}
+${A('reflect',{type:'short',q:'Of all the pollutants presented in this lesson, which one concerns you the most, and why?',min:20,need:2,
+ rub:[{re:/ozone|smog|acid|sulfur|sulphur|nitrogen|nox|particulate|soot|carbon monoxide|\bco\b|voc|radon|mold|formaldehyde|asbestos|lead|tobacco|smoke|dust|pesticide|diesel|pollut/i,m:'Name the pollutant that concerns you most.'},
+  {re:/because|since|worry|concern|risk|health|affect|harm|cause|kill|cancer|asthma|breath|fish|lake|family|children/i,m:'Say why: what harm does it cause, and to whom?'}],
+ ok:'Naming a pollutant and giving a reason is exactly what this reflection asks for.',model:'Radon concerns me most because it is invisible and odorless, comes up from the ground in almost any home, and increases the risk of lung cancer, yet a simple test can find it.'})}`);
+
+var TAKEAWAYS=['The troposphere is where weather and most air pollution occur. Ozone is protective in the stratosphere but a pollutant at ground level.',
+ 'Primary pollutants are harmful as emitted. Secondary pollutants (ozone, sulfuric and nitric acid) form from reactions, so controlling them means controlling their ingredients.',
+ 'Photochemical smog is a sunlight-driven, ozone-rich mix. Industrial smog is a sulfur-and-particulate mix. Thermal inversions trap either one near the ground.',
+ 'pH is logarithmic: each unit is a factor of 10. Acid deposition lands downwind of its sources, and places that cannot buffer it, like the Adirondacks, suffer most.',
+ 'Prevention beats dispersion or cleanup, because tall stacks move pollution downwind rather than removing it.',
+ 'Indoor air can be worse than outdoor air and we spend about 90% of our time indoors. Hazards you cannot sense, such as radon and carbon monoxide, call for testing and detectors.'];
+
+/* ================= runtime ================= */
+var S={m:0,a:{},t0:Date.now(),prior:0};
+var $=function(id){return document.getElementById(id);};
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!==undefined)e.innerHTML=h;return e;}
+var CREDIT={a:1,b:0.75,r:0.5};
+function scored(){return ORDER.filter(function(id){return ACTS[id].type!=='explore';});}
+function resolvedCount(ids){return ids.filter(function(id){return S.a[id];}).length;}
+function allDone(){return resolvedCount(ORDER)===ORDER.length;}
+function score(){var ids=scored(),t=0;ids.forEach(function(id){t+=CREDIT[S.a[id]]||0;});return 100*t/ids.length;}
+function elapsed(){return Math.round(S.prior+(Date.now()-S.t0)/1000);}
+function strip(h){return String(h).replace(/<[^>]*>/g,'');}
+
+/* ---------- persistence ---------- */
+function save(){
+  if(PREVIEW)return;
+  var c=ORDER.map(function(id){return S.a[id]||'-';}).join('');
+  LMS.set('cmi.suspend_data',JSON.stringify({m:S.m,c:c,s:elapsed()}));
+  LMS.set('cmi.core.lesson_location',String(S.m));
+  var st=LMS.get('cmi.core.lesson_status');
+  if(st===''||st==='not attempted'||st==='browsed')LMS.set('cmi.core.lesson_status','incomplete');
+  LMS.set('cmi.core.exit','suspend');LMS.commit();
+}
+function load(){
+  var js=LMS.get('cmi.suspend_data');if(!js)return;
+  try{var d=JSON.parse(js);S.m=Math.min(d.m|0,MODS.length-1);S.prior=d.s|0;
+    ORDER.forEach(function(id,i){var ch=(d.c||'')[i];if(ch&&ch!=='-')S.a[id]=ch;});}catch(e){}
+}
+
+/* ---------- chrome: progress wiggle + rail ---------- */
+function drawWig(){
+  var f=ORDER.length?resolvedCount(ORDER)/ORDER.length:0,d='';
+  function y(x){return 20+8*Math.sin(x/17)+4*Math.sin(x/6.5);}
+  for(var x=2;x<=258;x+=2)d+=(d?'L':'M')+x+' '+y(x).toFixed(1);
+  var dx=2+256*f;
+  $('wig').innerHTML='<svg viewBox="0 0 260 40"><defs><clipPath id="wc"><rect x="0" y="0" width="'+dx+'" height="40"/></clipPath></defs>'+
+    '<path d="'+d+'" fill="none" stroke="#4F8A66" stroke-width="2.5"/><path d="'+d+'" fill="none" stroke="#F1C400" stroke-width="3" clip-path="url(#wc)"/>'+
+    '<circle cx="'+dx+'" cy="'+y(dx)+'" r="5" fill="#FFFFFF" stroke="#04472A" stroke-width="2"/></svg>';
+  $('wig').setAttribute('aria-label',Math.round(f*100)+' percent of activities finished');
+}
+function drawRail(){
+  var h='';
+  MODS.forEach(function(m,i){var n=resolvedCount(m.acts),t=m.acts.length,done=n===t;
+    h+='<button type="button" data-m="'+i+'" class="'+(done?'done ':'')+(i===S.m?'cur':'')+'"><span class="pip"></span><span>'+m.short+'<small>'+n+' of '+t+' activities</small></span></button>';});
+  $('rail').innerHTML=h;
+}
+function refresh(){drawWig();drawRail();var p=document.getElementById('modprog');if(p&&MODS[S.m]){var n=resolvedCount(MODS[S.m].acts);p.textContent=n+' of '+MODS[S.m].acts.length+' activities finished in this module';}
+  var fb=document.getElementById('bFin');if(fb)fb.disabled=!allDone();}
+
+/* ---------- activity engine ---------- */
+function setFb(box,kind,html){var f=box.querySelector('.fb');f.className='fb '+kind;f.innerHTML=html;}
+function mountAct(box,id){
+  var d=ACTS[id],done=!!S.a[id];
+  var ctx={miss:0,finish:function(kind){if(!S.a[id]){S.a[id]=kind;save();refresh();}box.classList.add('resolved');}};
+  box.className='act'+(done?' resolved':'');
+  var tag={mcq:'Check your thinking',classify:'Sort it out',order:'Put it in order',short:'In your own words',form:'Calculate',explore:'Explore'}[d.type];
+  box.innerHTML='<div class="atag">'+tag+(done?' \u2713 finished (you can still practice)':'')+'</div><div class="abody"></div>';
+  TYPES[d.type](box.querySelector('.abody'),d,ctx);
+}
+var TYPES={};
+function lockAll(b){Array.prototype.forEach.call(b.querySelectorAll('input,select,textarea,button.up,button.dn,button.chk'),function(e){e.disabled=true;});}
+function revealBtn(b,fn){var s=b.querySelector('.slot');if(s.querySelector('.rev'))return;var x=el('button','b ghost rev','Show me the answer');x.type='button';x.onclick=fn;s.appendChild(x);}
+
+TYPES.mcq=function(b,d,ctx){
+  var order=shuffle(d.opts.map(function(o,i){return i;}),d.id);
+  b.innerHTML='<p class="aq">'+d.q+'</p><div class="choices">'+order.map(function(i){return '<label><input type="radio" name="r_'+d.id+'" value="'+i+'"><span>'+d.opts[i].t+'</span></label>';}).join('')+
+    '</div><div class="btns"><button type="button" class="b chk">Check</button><span class="slot"></span></div><div class="fb"></div>';
+  b.querySelector('.chk').onclick=function(){
+    var s=b.querySelector('input:checked');if(!s){setFb(b,'hint','Choose an answer first.');return;}
+    var i=+s.value;
+    if(i===d.ans){setFb(b,'ok','<b>Yes.</b> '+d.why);lockAll(b);ctx.finish(ctx.miss<=1?'a':'b');}
+    else{ctx.miss++;setFb(b,'no',d.opts[i].fb||'Not quite. Re-read the question and try again.');if(ctx.miss>=2)revealBtn(b,function(){
+      var l=b.querySelectorAll('.choices label');Array.prototype.forEach.call(l,function(x){if(+x.querySelector('input').value===d.ans){x.classList.add('right');x.querySelector('input').checked=true;}});
+      setFb(b,'hint','<b>Answer:</b> '+d.opts[d.ans].t+' '+d.why);lockAll(b);ctx.finish('r');});}
+  };
+};
+TYPES.classify=function(b,d,ctx){
+  var idx=shuffle(d.items.map(function(x,i){return i;}),d.id);
+  b.innerHTML='<p class="aq">'+d.q+'</p>'+idx.map(function(i){return '<div class="crow" data-i="'+i+'"><span class="ct">'+d.items[i].t+'</span><select aria-label="Category for: '+strip(d.items[i].t).replace(/"/g,'')+'"><option value="">Choose\u2026</option>'+
+    d.cats.map(function(c,k){return '<option value="'+k+'">'+c+'</option>';}).join('')+'</select><div class="cfb"></div></div>';}).join('')+
+    '<div class="btns"><button type="button" class="b chk">Check</button><span class="slot"></span></div><div class="fb"></div>';
+  function rows(){return Array.prototype.slice.call(b.querySelectorAll('.crow'));}
+  b.querySelector('.chk').onclick=function(){
+    var bad=0,blank=0;
+    rows().forEach(function(r){var it=d.items[+r.dataset.i],v=r.querySelector('select').value;r.className='crow';
+      if(v===''){blank++;r.querySelector('.cfb').textContent='';return;}
+      if(+v===it.c){r.classList.add('ok');r.querySelector('.cfb').textContent='\u2713 '+(it.ok||'');}
+      else{bad++;r.classList.add('no');r.querySelector('.cfb').textContent=it.hint||'Not that one. Think again about what this describes.';}});
+    if(!bad&&!blank){setFb(b,'ok','<b>All sorted.</b> '+d.why);lockAll(b);ctx.finish(ctx.miss<=1?'a':'b');return;}
+    if(blank&&!bad){setFb(b,'hint','Choose a category for every item, then check.');return;}
+    ctx.miss++;setFb(b,'no',bad+' item'+(bad>1?'s are':' is')+' in the wrong place. Read the note beside '+(bad>1?'each':'it')+'.');
+    if(ctx.miss>=2)revealBtn(b,function(){rows().forEach(function(r){var it=d.items[+r.dataset.i];r.querySelector('select').value=it.c;r.className='crow ok';r.querySelector('.cfb').textContent='\u2713 '+(it.ok||'');});
+      setFb(b,'hint','<b>Here is the sorted list.</b> '+d.why);lockAll(b);ctx.finish('r');});
+  };
+};
+TYPES.order=function(b,d,ctx){
+  var n=d.items.length,seq=shuffle(d.items.map(function(x,i){return i;}),d.id),ok=[];
+  if(seq.every(function(v,i){return v===i;}))seq.push(seq.shift());
+  b.innerHTML='<p class="aq">'+d.q+'</p><div class="list"></div><div class="btns"><button type="button" class="b chk">Check order</button><span class="slot"></span></div><div class="fb"></div>';
+  var list=b.querySelector('.list');
+  function draw(){list.innerHTML='';seq.forEach(function(v,p){var r=el('div','orow'+(ok[p]?' ok':''));r.innerHTML='<span class="otxt">'+d.items[v]+'</span><button type="button" class="up" aria-label="Move up">\u2191</button><button type="button" class="dn" aria-label="Move down">\u2193</button>';
+    r.querySelector('.up').onclick=function(){if(p>0){var t=seq[p];seq[p]=seq[p-1];seq[p-1]=t;ok=[];draw();}};
+    r.querySelector('.dn').onclick=function(){if(p<n-1){var t=seq[p];seq[p]=seq[p+1];seq[p+1]=t;ok=[];draw();}};list.appendChild(r);});}
+  draw();
+  b.querySelector('.chk').onclick=function(){
+    ok=seq.map(function(v,p){return v===p;});var c=ok.filter(Boolean).length;draw();
+    if(c===n){setFb(b,'ok','<b>That is the right sequence.</b> '+d.why);lockAll(b);ctx.finish(ctx.miss<=1?'a':'b');return;}
+    ctx.miss++;setFb(b,'no',c+' of '+n+' steps are in the right place (marked green). '+(d.nudge||'Re-read each step and ask what has to happen before it.'));
+    if(ctx.miss>=2)revealBtn(b,function(){seq=d.items.map(function(x,i){return i;});ok=seq.map(function(){return true;});draw();setFb(b,'hint','<b>Correct order shown.</b> '+d.why);lockAll(b);ctx.finish('r');});
+  };
+};
+TYPES.short=function(b,d,ctx){
+  b.innerHTML='<p class="aq">'+d.q+'</p><textarea aria-label="Your answer" placeholder="Write in your own words\u2026"></textarea><div class="btns"><button type="button" class="b chk">Check my answer</button><span class="slot"></span></div><div class="fb"></div>';
+  var ta=b.querySelector('textarea');
+  b.querySelector('.chk').onclick=function(){
+    var t=ta.value.trim(),w=t.split(/\s+/).filter(Boolean).length,min=d.min||10;
+    if(w<min){setFb(b,'hint','Say a little more. Aim for at least '+min+' words so your thinking shows.');return;}
+    var miss=[],hits=0;d.rub.forEach(function(r){var okk=r.fn?r.fn(t):r.re.test(t);if(okk)hits++;else miss.push(r.m);});
+    if(hits>=(d.need||d.rub.length)){setFb(b,'ok','<b>Good.</b> '+(d.ok||'You covered the key ideas.'));lockAll(b);ctx.finish(ctx.miss<=1?'a':'b');return;}
+    ctx.miss++;setFb(b,'no',(hits?'Part of this is there. ':'')+miss.slice(0,2).join(' '));
+    if(ctx.miss>=2)revealBtn(b,function(){setFb(b,'hint','<b>One strong answer:</b> '+d.model);lockAll(b);ctx.finish('r');});
+  };
+};
+TYPES.form=function(b,d,ctx){
+  b.innerHTML='<p class="aq">'+d.q+'</p>'+d.fields.map(function(f,i){return '<div class="field" data-i="'+i+'"><label for="f_'+d.id+i+'">'+f.label+'</label><div class="row"><input type="text" id="f_'+d.id+i+'" autocomplete="off" spellcheck="false"> <span>'+(f.unit||'')+'</span></div><div class="ffb"></div></div>';}).join('')+
+    '<div class="btns"><button type="button" class="b chk">Check</button><span class="slot"></span></div><div class="fb"></div>';
+  function fields(){return Array.prototype.slice.call(b.querySelectorAll('.field'));}
+  fields().forEach(function(w){w.querySelector('input').addEventListener('input',function(){w.className='field';w.querySelector('.ffb').textContent='';});});
+  b.querySelector('.chk').onclick=function(){
+    var bad=0,blank=0;
+    fields().forEach(function(w){var f=d.fields[+w.dataset.i],raw=w.querySelector('input').value.trim(),fb=w.querySelector('.ffb');w.className='field';
+      if(!raw){blank++;return;}
+      var x;try{x=evalNum(raw);}catch(e){bad++;w.classList.add('no');fb.textContent='I could not read that as a number. Type digits or a calculation such as 3000*(1-e^(-0.5)), with no units.';return;}
+      var okk=f.tolAbs!==undefined?Math.abs(x-f.ans)<=f.tolAbs:close(x,f.ans,f.tol);
+      if(okk){w.classList.add('ok');fb.textContent='\u2713 '+(f.ok||'Correct.');return;}
+      bad++;w.classList.add('no');var m=null;(f.wrong||[]).forEach(function(q){if(!m&&q.t(x))m=q.m;});fb.textContent=m||f.m||'Not quite. Check your arithmetic and try again.';});
+    if(!bad&&!blank){setFb(b,'ok','<b>Right.</b> '+d.why);lockAll(b);ctx.finish(ctx.miss<=1?'a':'b');return;}
+    if(blank&&!bad){setFb(b,'hint','Fill in every box, then check.');return;}
+    ctx.miss++;setFb(b,'no','Look at the note under each box that needs another look.');
+    if(ctx.miss>=2)revealBtn(b,function(){fields().forEach(function(w){var f=d.fields[+w.dataset.i];w.querySelector('input').value=String(+f.ans.toFixed(2));w.className='field ok';w.querySelector('.ffb').textContent='';});
+      setFb(b,'hint','<b>Worked answers shown.</b> '+(d.worked||d.why));lockAll(b);ctx.finish('r');});
+  };
+};
+TYPES.explore=function(b,d,ctx){
+  b.innerHTML='<p class="aq">'+d.q+'</p><div class="ebody"></div><div class="fb"></div>';
+  d.mount(b.querySelector('.ebody'),function(){setFb(b,'ok','<b>Explored.</b> '+(d.done||''));ctx.finish('e');},ACTS[d.id]);
+};
+
+/* ---------- modules ---------- */
+function renderMod(i){
+  S.m=i;var m=MODS[i],main=$('main');
+  main.innerHTML='<article class="card"><h2>'+m.title+'</h2><p class="sec">'+m.time+'</p>'+m.body+'</article>'+
+    '<div class="nav2"><div><button type="button" class="b alt" id="bPrev"'+(i===0?' disabled':'')+'>Previous module</button></div><span class="prog" id="modprog"></span><div>'+
+    (i<MODS.length-1?'<button type="button" class="b" id="bNext">Next module</button>':'<button type="button" class="b" id="bFin">Finish the lesson</button>')+'</div></div>';
+  Array.prototype.forEach.call(main.querySelectorAll('[data-act]'),function(x){mountAct(x,x.dataset.act);});
+  save();refresh();window.scrollTo(0,0);
+}
+function showFinal(){
+  var sc=Math.round(score()),h='<div class="card final"><h2>Lesson complete</h2><p class="sec">Mastery score on the checks</p><div class="score">'+sc+'%</div>'+
+   '<p>Full credit means you got an activity right with at most one miss. Showing an answer earns half credit. Use this to decide what to revisit before the Summit.</p><table class="t"><tr><th>Module</th><th>Credit</th></tr>';
+  MODS.forEach(function(m){var ids=m.acts.filter(function(id){return ACTS[id].type!=='explore';}),t=0;ids.forEach(function(id){t+=CREDIT[S.a[id]]||0;});h+='<tr><td>'+m.short+'</td><td>'+Math.round(100*t/ids.length)+'%</td></tr>';});
+  h+='</table><h3>Key takeaways</h3><ul>'+TAKEAWAYS.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul><div class="btns"><button type="button" class="b alt" id="bRev">Review a module</button></div></div>';
+  $('main').innerHTML=h;window.scrollTo(0,0);$('bRev').onclick=function(){renderMod(0);};
+  if(PREVIEW)return;
+  function hms(t){function z(x){return(x<10?'0':'')+x;}return z(Math.floor(t/3600))+':'+z(Math.floor(t%3600/60))+':'+z(t%60);}
+  var stat=sc>=CONFIG.MASTERY?'passed':'completed';
+  LMS.set('cmi.core.score.min','0');LMS.set('cmi.core.score.max','100');LMS.set('cmi.core.score.raw',String(sc));
+  LMS.set('cmi.core.lesson_status',stat);LMS.set('cmi.core.exit','');LMS.set('cmi.core.session_time',hms(Math.max(0,Math.round((Date.now()-S.t0)/1000))));
+  save();LMS.set('cmi.core.lesson_status',stat);LMS.set('cmi.core.exit','');LMS.commit();
+}
+document.addEventListener('click',function(e){
+  var t=e.target;while(t&&t!==document&&!t.id&&!(t.dataset&&t.dataset.m!==undefined))t=t.parentNode;if(!t||t===document)return;
+  if(t.dataset&&t.dataset.m!==undefined&&t.closest&&t.closest('#rail')){renderMod(+t.dataset.m);$('rail').classList.remove('open');return;}
+  if(t.id==='bNext')renderMod(S.m+1);else if(t.id==='bPrev')renderMod(S.m-1);else if(t.id==='bFin')showFinal();else if(t.id==='railbtn')$('rail').classList.toggle('open');
+});
+window.addEventListener('pagehide',function(){if(!PREVIEW&&LMS.mode==='lms'){save();LMS.finish();}});
+if(CONFIG.BLOCK_PASTE){['copy','cut','paste','drop'].forEach(function(ev){document.addEventListener(ev,function(e){e.preventDefault();},true);});}
+load();drawWig();renderMod(S.m);
+})();
+</script></body></html>

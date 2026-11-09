@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="atmosphere_air_pollution_v1" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata><schema>ADL SCORM</schema><schemaversion>1.2</schemaversion></metadata>
+  <organizations default="org_atmos">
+    <organization identifier="org_atmos">
+      <title>The Atmosphere and Air Pollution</title>
+      <item identifier="item_atmos" identifierref="res_atmos" isvisible="true"><title>The Atmosphere and Air Pollution</title></item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="res_atmos" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="img/aciddep.jpg"/>
+      <file href="img/acidharm.jpg"/>
+      <file href="img/house.jpg"/>
+      <file href="img/indsmog.jpg"/>
+      <file href="img/inv1.jpg"/>
+      <file href="img/layers.jpg"/>
+      <file href="img/nyradon.jpg"/>
+      <file href="img/ozmap.jpg"/>
+      <file href="img/ozyield.jpg"/>
+      <file href="img/phmap.jpg"/>
+      <file href="img/phscale.jpg"/>
+      <file href="img/radon.jpg"/>
+      <file href="img/smogla.jpg"/>
+    </resource>
+  </resources>
+</manifest>
